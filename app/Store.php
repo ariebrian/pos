@@ -14,4 +14,6 @@ class Store extends Model
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public $timestamps = false;
 }

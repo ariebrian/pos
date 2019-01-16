@@ -15,6 +15,9 @@ class ProductController extends Controller
     public function index()
     {
         //
+        $product = Product::all();
+        // dd($product);
+        return view('products', ['products' => $product]);
     }
 
     /**
@@ -36,6 +39,9 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        $product = new Product;
+        $product = $request->all();
+        $product->save();
     }
 
     /**

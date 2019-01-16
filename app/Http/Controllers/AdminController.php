@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Admin;
+use App\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -15,6 +15,8 @@ class AdminController extends Controller
     public function index()
     {
         //
+        $admins = User::all();
+        return view('admins', ['admins'=>$admins]);
     }
 
     /**

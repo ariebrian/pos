@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Store;
+use App\User;
 use Illuminate\Http\Request;
+use  Illuminate\Support\Facades\DB;
+
 
 class StoreController extends Controller
 {
@@ -15,6 +18,10 @@ class StoreController extends Controller
     public function index()
     {
         //
+        $stores = Store::all();
+        // $stores1 = DB::table('stores')->get();
+        // dd($stores);
+        return view('stores', ['stores'=>$stores]);
     }
 
     /**
@@ -36,6 +43,11 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         //
+        $store = new Store;
+        $store = $request->all();
+        $store->save();
+
+        //redirect
     }
 
     /**

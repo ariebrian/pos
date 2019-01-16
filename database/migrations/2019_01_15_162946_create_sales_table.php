@@ -20,6 +20,9 @@ class CreateSalesTable extends Migration
             $table->integer('store_id')->unsigned();
             $table->integer('qty');
             $table->timestamp('created_at');
+
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
         });
     }
 

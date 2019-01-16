@@ -16,14 +16,22 @@
                     <div class="box-body table-responsive">
                         <table class="table table-bordered table-hover" id="dataTable">
                             <thead>
-                                <th>Nama</th>
-                                <th>Alamat</th>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Token</th>
                             </thead>
                             <tbody>
                                 @foreach ($stores as $store)
                                     <tr>
+                                        <td>{{$store->id}}</td>
                                         <td>{{$store->name}}</td>
                                         <td>{{$store->address}}</td>
+                                        <td>{{$store->phone}}</td>
+                                        <td>{{$store->email}}</td>
+                                        <td>{{$store->token}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

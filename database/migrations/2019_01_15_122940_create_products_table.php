@@ -18,7 +18,6 @@ class CreateProductsTable extends Migration
             $table->string('SKU');
             $table->string('name');
             $table->integer('price');
-            $table->string('satuan');
             $table->timestamps();
         });
     }

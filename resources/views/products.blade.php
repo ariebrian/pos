@@ -16,14 +16,22 @@
                     <div class="box-body table-responsive">
                         <table class="table table-bordered table-hover" id="dataTable">
                             <thead>
+                                <th>Id</th>
                                 <th>SKU</th>
-                                <th>Nama</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Created At</th>
+                                <th>Updated At</th>
                             </thead>
                             <tbody>
                                 @foreach ($products as $product)
                                     <tr>
+                                        <td>{{$product->id}}</td>
                                         <td>{{$product->SKU}}</td>
                                         <td>{{$product->name}}</td>
+                                        <td>{{$product->price}}</td>
+                                        <td>{{$product->created_at}}</td>
+                                        <td>{{$product->updated_at}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

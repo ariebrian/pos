@@ -26,10 +26,10 @@ class CreateStoresTable extends Migration
 
         Schema::create('product_stores', function (Blueprint $table) {
             $table->integer('product_id')->unsigned()->index();
-            $table->foreign('id')->on('products')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
             $table->integer('store_id')->unsigned()->index();
-            $table->foreign('id')->on('stores')->onDelete('cascade');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             
             $table->timestamps();
         });

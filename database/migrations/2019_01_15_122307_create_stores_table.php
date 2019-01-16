@@ -24,7 +24,7 @@ class CreateStoresTable extends Migration
             // $table->timestamps();
         });
 
-        Schema::create('product_stores', function (Blueprint $table) {
+        Schema::create('user_product', function (Blueprint $table) {
             $table->integer('product_id')->unsigned()->index();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 

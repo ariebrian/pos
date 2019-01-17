@@ -4,6 +4,14 @@
 @section('content_header')
     <h1>Products</h1>
 @stop
+@section('js')
+<script>
+        $(document).ready(function () {
+            $('.data-table').dataTable();
+        });
+    </script>
+@endsection
+
 
 {{-- @dd($stores); --}}
 @section('content')
@@ -20,7 +28,7 @@
                             </nav>
                     </div>  
                     <div class="box-body table-responsive">
-                        <table class="table table-bordered table-hover" id="dataTable">
+                        <table class="table table-bordered table-striped data-table" id="dataTable">
                             <thead>
                                 <th>Id</th>
                                 <th>SKU</th>

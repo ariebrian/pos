@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Store;
+use App\Setting;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -102,5 +103,18 @@ class ProductController extends Controller
         $result = array('products' => $prods);
         // dd($result);
         return view('productuser',$result);
+    }
+
+    public function recommendation()
+    {
+        $batas = Setting::all();
+        // dd($batas[0]->limit);
+        $store = Store::with('products')->get();
+        $data = [
+                'store' => $store ,
+                'limit' =>$batas[0]->limit
+        ];
+        
+        return view('recommend',['store'=>$store, 'limit'=>$batas[0]->limit]);
     }
 }

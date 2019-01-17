@@ -27,6 +27,7 @@ Route::get('/listadmin', 'AdminController@index')->name('listadmin')->middleware
 Route::get('/products', 'ProductController@index')->name('products')->middleware('auth');
 Route::get('/sales', 'SalesController@index')->name('sales')->middleware('auth');
 // Route::get('/saleid', 'SalesController@create')->name('saleid')->middleware('auth');
+Route::get('/recommendation', 'ProductController@recommendation')->name('productrecs')->middleware('auth');
 
 Route::get('/products-users', 'ProductController@productuser')->name('products-users')->middleware('auth');
 

@@ -38,11 +38,12 @@
                                 <th></th>
                             </thead>
                             <tbody>
-                                @foreach ($products as $product)
-                                     @foreach ($product->products as $item)
-                                        @if ($item->pivot->stock != NULL)
+                                {{-- @dd($store); --}}
+                                @foreach ($store as $toko)
+                                     @foreach ($toko->products as $item)
+                                        @if ($item->pivot->stock < $limit)
                                         <tr>
-                                                <td>{{$product->name}}</td>
+                                                <td>{{$toko->name}}</td>
                                                 <td>{{$item->name}}</td>
                                                 @if ($item->pivot->stock == 0)
                                                     <td>{{$item->pivot->stock}}</td>
@@ -59,20 +60,7 @@
                                                 </td>
                                                 <td>{{Carbon\Carbon::parse($item->created_at)->format('d F Y H:i')}}</td>
                                              </tr>
-                                        @else
-                                        <td>{{$product->name}}</td>
-                                        <td>{{$item->name}}</td>
-                                        <td>No Stock</td>
                                         
-                                        <td>
-                                            @if ($item->pivot->active != 0)
-                                                Active
-                                            @else
-                                                Inactive
-                                            @endif
-                                        </td>
-                                        <td>{{Carbon\Carbon::parse($item->created_at)->format('d F Y H:i')}}</td>
-                                     </tr>
                                         @endif
                                      @endforeach  
                                 @endforeach

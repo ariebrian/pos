@@ -22,6 +22,8 @@ Route::group(['middleware' => 'apiauth'], function () {
     Route::get('/productsauth', 'api\ApiController@getProduct');
     Route::get('/yourprod', 'api\ApiController@getProductUser');
     Route::get('/yoursales', 'api\ApiController@getSales');
+    Route::get('/recommendation', 'api\ApiController@recommendation');
+
     
     Route::post('/postprod', 'api\ApiController@postProductUser');
     Route::post('/postsale', 'api\ApiController@postSales');

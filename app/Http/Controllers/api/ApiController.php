@@ -14,6 +14,7 @@ use App\Store;
 use App\Product;
 use App\ProdUser;
 use App\Sales;
+use App\Setting;
 
 class ApiController extends Controller
 {
@@ -125,18 +126,32 @@ class ApiController extends Controller
         $sales->id_trans = $saleId;
         $sales->qty = $request->qty;
         // dd($sales);
+
+        $store = Store::with('products')->find($storeId->id);
+        $newProd = $store->products()->where('id',$prod->id)->first();
+        // dd($newProd->pivot->stock);
+        $newStock = $newProd->pivot->stock - $request->qty;
+        $store->products()->updateExistingPivot($prod->id,['stock' => $newStock]);
         $sales->save();
 
-        $prodUser = ProdUser::where('store_id', $storeId->id)
-                            ->where('product_id', $prod->id)->first();
-        // $newStock = new ProdUser;
-        $prodUser->store_id = $storeId->id;
-        $prodUser->product_id = $prod->id;
-        $prodUser->satuan = $prodUser->satuan;
-        $prodUser->active = $prodUser->active;
-        $prodUser->stock = $prodUser->stock - $sales->qty;
-        $prodUser->stores()->updateExistingPivot('stock');
-
         return response()->json($sales, 201); 
+    }
+
+    public function recommendation(Request $request)
+    {
+        $limit = Setting::all();
+        $batas = $limit[0]->limit;
+        // dd($batas);
+        $storeId = Store::where('token', $request->header('Authorization'))->first();
+        $store = Store::with('products')->find($storeId->id);
+        $prod = $store->products()->get();
+        $data = array();
+        for ($i=0; $i < sizeof($prod); $i++) {
+            // dd(gettype($prod[$i]->pivot->stock)); 
+            if ($prod[$i]->pivot->stock < $batas) {
+                array_push($data,$prod[$i]);   
+            }
+        }
+        return response()->json($data, 200);
     }
 }

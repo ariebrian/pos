@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+
 
 class AdminController extends Controller
 {
@@ -27,6 +32,7 @@ class AdminController extends Controller
     public function create()
     {
         //
+        return view('createadmin');
     }
 
     /**
@@ -38,6 +44,14 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         //
+        $admin = new User;
+        $admin->name = $request->name;
+        $admin->password = Hash::make($request->password);
+        $admin->email = $request->email;
+        // dd($admin);
+        $admin->save();
+
+        return redirect('listadmin');
     }
 
     /**
@@ -45,7 +59,7 @@ class AdminController extends Controller
      *
      * @param  \App\Admin  $admin
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function show(Admin $admin)
     {
         //

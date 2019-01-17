@@ -24,13 +24,16 @@ class CreateStoresTable extends Migration
             // $table->timestamps();
         });
 
-        Schema::create('user_product', function (Blueprint $table) {
+        Schema::create('product_store', function (Blueprint $table) {
             $table->integer('product_id')->unsigned()->index();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
             $table->integer('store_id')->unsigned()->index();
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             
+            $table->integer('stock')->unsigned()->nullable();
+            $table->string('satuan')->nullable();
+            $table->boolean('active')->default(false);
             $table->timestamps();
         });
     }

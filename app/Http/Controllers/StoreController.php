@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Store;
 use App\User;
+use App\ProdUser;
 use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use JWTAuth;
+use JWTFactory;
+use Dirape\Token\Token;
 
 
 class StoreController extends Controller
@@ -32,6 +37,7 @@ class StoreController extends Controller
     public function create()
     {
         //
+        return view('createstore');
     }
 
     /**
@@ -44,10 +50,17 @@ class StoreController extends Controller
     {
         //
         $store = new Store;
-        $store = $request->all();
+        $store->name = $request->name;
+        $store->address = $request->address;
+        $store->phone = $request->phone;
+        $store->email = $request->email;
+        $store->password = Hash::make($request->password);
+        $token =  (new Token())->Unique('stores', 'token', 60);
+        // dd($token);
+        $store->token = $token;
         $store->save();
 
-        //redirect
+        return redirect('stores');
     }
 
     /**

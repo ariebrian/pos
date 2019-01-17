@@ -22,19 +22,22 @@
                     <div class="box-body table-responsive">
                         <table class="table table-bordered table-hover" id="dataTable">
                             <thead>
-                                <th>Name</th>
-                                <th>Email</th>
+                                <th>Store</th>
+                                <th>Product</th>
+                                <th>ID Trans</th>
+                                <th>QTY</th>
                                 <th>Created At</th>
-                                <th>Updated At</th>
+                                {{-- <th>Updated At</th> --}}
                                 <th></th>
                             </thead>
                             <tbody>
-                                @foreach ($admins as $admin)
+                                @foreach ($sales as $sale)
                                     <tr>
-                                        <td>{{$admin->name}}</td>
-                                        <td>{{$admin->email}}</td>
-                                        <td>{{Carbon\Carbon::parse($admin->created_at)->format('d F Y H:i')}}</td>
-                                        <td>{{Carbon\Carbon::parse($admin->updated_at)->format('d F Y H:i')}}</td>
+                                        <td>{{$sale->stores->name}}</td>
+                                        <td>{{$sale->products->name}}</td>
+                                        <td>{{$sale->id_trans}}</td>
+                                        <td>{{$sale->qty}}</td>
+                                        <td>{{Carbon\Carbon::parse($sale->created_at)->format('d F Y H:i')}}</td>
                                         <td class="fa fa-pencil"></td>
                                     </tr>
                                 @endforeach

@@ -12,12 +12,29 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(Auth::check()) {
+        return redirect()->route('home');
+    }
+    
+    return view('auth/login');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/stores', 'StoreController@index');
-Route::get('/listadmin', 'AdminController@index');
-Route::get('/products', 'ProductController@index');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::get('/stores', 'StoreController@index')->name('stores')->middleware('auth');
+Route::get('/listadmin', 'AdminController@index')->name('listadmin')->middleware('auth');
+Route::get('/products', 'ProductController@index')->name('products')->middleware('auth');
+Route::get('/sales', 'SalesController@index')->name('sales')->middleware('auth');
+// Route::get('/saleid', 'SalesController@create')->name('saleid')->middleware('auth');
+
+Route::get('/products-users', 'ProductController@productuser')->name('products-users')->middleware('auth');
+
+Route::get('/create-admin', 'AdminController@create')->name('create-admin')->middleware('auth');
+Route::get('/create-store', 'StoreController@create')->name('create-store')->middleware('auth');
+Route::get('/create-product', 'ProductController@create')->name('create-product')->middleware('auth');
+
+
+Route::post('/storeadmin', 'AdminController@store')->name('storeadmin')->middleware('auth');
+Route::post('/storestore', 'StoreController@store')->name('storestore')->middleware('auth');
+Route::post('/storeprod', 'ProductController@store')->name('storeprod')->middleware('auth');

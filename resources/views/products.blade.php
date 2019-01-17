@@ -11,8 +11,14 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header with-border">
-
-                    </div>
+                            <nav class="navbar navbar-static-top">
+                                    <div class="container">
+                                        <ul class="nav navbar-nav">
+                                        <li class="active"><a href="{{route('create-product')}}">Add new  </a></li>
+                                        </ul>
+                                    </div>
+                            </nav>
+                    </div>  
                     <div class="box-body table-responsive">
                         <table class="table table-bordered table-hover" id="dataTable">
                             <thead>

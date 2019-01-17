@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Sales;
+use App\Store;
+use App\Product;
 use Illuminate\Http\Request;
 
 class SalesController extends Controller
@@ -15,6 +17,14 @@ class SalesController extends Controller
     public function index()
     {
         //
+        // $test = Sales::with('products')->with('stores')->first();
+        // dd($test);  
+        $sales = Sales::with('products')
+                        ->with('stores')
+                        ->orderBy('id_trans','desc')
+                        ->get();
+        // dd($sales);
+        return view('sales', ['sales'=>$sales]);
     }
 
     /**
@@ -25,6 +35,11 @@ class SalesController extends Controller
     public function create()
     {
         //
+        $sales = Sales::with('products')
+                        ->with('stores')
+                        ->orderBy('id_trans','desc')
+                        ->first();
+        dd($sales->id_trans += 1);
     }
 
     /**

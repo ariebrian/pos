@@ -16,4 +16,15 @@ class Store extends Model
     ];
 
     public $timestamps = false;
+
+    public function products()
+    {
+        return $this->belongsToMany('App\Product')->withPivot('stock','satuan','active','created_at');
+    }
+
+    public function sales()
+    {
+        return $this->hasMany('App\Sales');
+    }
+
 }

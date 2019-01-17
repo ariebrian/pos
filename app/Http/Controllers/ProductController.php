@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Store;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -28,6 +29,7 @@ class ProductController extends Controller
     public function create()
     {
         //
+        return view('createproduct');
     }
 
     /**
@@ -40,8 +42,13 @@ class ProductController extends Controller
     {
         //
         $product = new Product;
-        $product = $request->all();
+        $product->SKU = $request->SKU;
+        $product->name = $request->name;
+        $product->price = $request->price;
+
         $product->save();
+
+        return redirect('products');
     }
 
     /**
@@ -87,5 +94,13 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    public function productuser()
+    {
+        $prods = Store::with('products')->get();
+        $result = array('products' => $prods);
+        // dd($result);
+        return view('productuser',$result);
     }
 }

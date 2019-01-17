@@ -36,6 +36,7 @@
                                 <th>Price</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
+                                <th></th>
                             </thead>
                             <tbody>
                                 @foreach ($products as $product)
@@ -46,6 +47,8 @@
                                         <td>{{$product->price}}</td>
                                         <td>{{$product->created_at}}</td>
                                         <td>{{$product->updated_at}}</td>
+                                        <td><a class="fa fa-pencil" href="/edit-product/{{$product->id}}" style="color : black"></a></td>
+
                                     </tr>
                                 @endforeach
                             </tbody>

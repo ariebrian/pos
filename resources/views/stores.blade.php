@@ -36,6 +36,7 @@
                                 <th>Phone</th>
                                 <th>Email</th>
                                 <th>Token</th>
+                                <th></th>
                             </thead>
                             <tbody>
                                 @foreach ($stores as $store)
@@ -46,6 +47,8 @@
                                         <td>{{$store->phone}}</td>
                                         <td>{{$store->email}}</td>
                                         <td>{{$store->token}}</td>
+                                        <td><a class="fa fa-pencil" href="/edit-store/{{$store->id}}" style="color : black"></a></td>
+                                       
                                     </tr>
                                 @endforeach
                             </tbody>

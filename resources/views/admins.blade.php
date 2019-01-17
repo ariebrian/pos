@@ -43,7 +43,7 @@
                                         <td>{{$admin->email}}</td>
                                         <td>{{Carbon\Carbon::parse($admin->created_at)->format('d F Y H:i')}}</td>
                                         <td>{{Carbon\Carbon::parse($admin->updated_at)->format('d F Y H:i')}}</td>
-                                        <td class="fa fa-pencil"></td>
+                                        <td><a class="fa fa-pencil" href="edit-admin/{{$admin->id}}" style="color : black"></a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

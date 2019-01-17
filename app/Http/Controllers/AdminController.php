@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 
 
 class AdminController extends Controller
@@ -71,9 +72,12 @@ class AdminController extends Controller
      * @param  \App\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function edit(Admin $admin)
+    public function edit($id)
     {
         //
+        $data = ['id' => $id];
+        return view('updateadmin',$data);
+
     }
 
     /**
@@ -83,9 +87,18 @@ class AdminController extends Controller
      * @param  \App\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Admin $admin)
+    public function update(Request $request)
     {
         //
+        $id = Auth::user()->id;
+
+        $admin = User::find($id);
+        $admin->id = $id;
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->save();
+        // dd($admin);
+        return redirect('listadmin');
     }
 
     /**

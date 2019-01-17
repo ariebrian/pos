@@ -69,9 +69,11 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
         //
+        $data = ['id'=>$id];
+        return view('updateproduct',$data);
     }
 
     /**
@@ -81,9 +83,19 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request)
     {
         //
+        $id = $request->id;
+        $product = Product::find($id);
+        $product->id = $id;
+        $product->name = $request->name;
+        $product->SKU = $request->SKU;
+        $product->price = $request->price;
+        
+        $product->save();
+        // dd($admin);
+        return redirect('products');
     }
 
     /**

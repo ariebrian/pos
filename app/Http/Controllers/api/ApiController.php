@@ -66,25 +66,15 @@ class ApiController extends Controller
 
     public function upProductUser(Request $request)
     {
-        /**
-         * store  -> header
-         * product id -> milih
-         * stock
-         * status
-         * 
-         * store->attach product
-         * save -> product_store
-         */
-
         $storeId = Store::where('token', $request->header('Authorization'))->first();
-        // $prod = Product::where('id', $request->productId)->first();
-        $prodUser = ProdUser::where('store_id', $storeId->id)
-                            ->where('product_id', $request->productId);
-        $prodUser->store_id = $storeId->id;
-        $prodUser->product_id = $request->productId;
-        $prodUser->satuan = $request->satuan;
-        $prodUser->active = $request->active;
-        $prodUser->save();
+        $store = Store::with('products')->find($storeId->id);
+        $prod = Product::where('id', $request->productId)->first();
+        
+        $newProd = $store->products()->where('id',$prod->id)->first();
+        $newStock = $newProd->pivot->stock + $request->stock;
+        $store->products()->updateExistingPivot($prod->id,['stock' => $newStock]);
+
+        
         return response()->json('Success', 201);
     }
 

@@ -26,8 +26,10 @@ Route::get('/stores', 'StoreController@index')->name('stores')->middleware('auth
 Route::get('/listadmin', 'AdminController@index')->name('listadmin')->middleware('auth');
 Route::get('/products', 'ProductController@index')->name('products')->middleware('auth');
 Route::get('/sales', 'SalesController@index')->name('sales')->middleware('auth');
-// Route::get('/saleid', 'SalesController@create')->name('saleid')->middleware('auth');
 Route::get('/recommendation', 'ProductController@recommendation')->name('productrecs')->middleware('auth');
+Route::get('/edit-admin/{id}', 'AdminController@edit')->name('update-admin')->middleware('auth');
+Route::get('/edit-product/{id}', 'ProductController@edit')->name('update-product')->middleware('auth');
+Route::get('/edit-store/{id}', 'StoreController@edit')->name('update-store')->middleware('auth');
 
 Route::get('/products-users', 'ProductController@productuser')->name('products-users')->middleware('auth');
 
@@ -39,3 +41,6 @@ Route::get('/create-product', 'ProductController@create')->name('create-product'
 Route::post('/storeadmin', 'AdminController@store')->name('storeadmin')->middleware('auth');
 Route::post('/storestore', 'StoreController@store')->name('storestore')->middleware('auth');
 Route::post('/storeprod', 'ProductController@store')->name('storeprod')->middleware('auth');
+Route::post('/upadmin', 'AdminController@update')->name('upadmin')->middleware('auth');
+Route::post('/upprod', 'ProductController@update')->name('upprod')->middleware('auth');
+Route::post('/upstore', 'StoreController@update')->name('upstore')->middleware('auth');

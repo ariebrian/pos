@@ -35,8 +35,8 @@
                                 <th>ID Trans</th>
                                 <th>QTY</th>
                                 <th>Created At</th>
-                                {{-- <th>Updated At</th> --}}
                                 <th></th>
+                                {{-- <th>Updated At</th> --}}
                             </thead>
                             <tbody>
                                 @foreach ($sales as $sale)
@@ -46,7 +46,8 @@
                                         <td>{{$sale->id_trans}}</td>
                                         <td>{{$sale->qty}}</td>
                                         <td>{{Carbon\Carbon::parse($sale->created_at)->format('d F Y H:i')}}</td>
-                                        <td class="fa fa-pencil"></td>
+                                        <td><a class="fa fa-pencil" href="#" style="color : black"></a></td>
+
                                     </tr>
                                 @endforeach
                             </tbody>

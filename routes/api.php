@@ -26,6 +26,8 @@ Route::group(['middleware' => 'apiauth'], function () {
 
     
     Route::post('/postprod', 'api\ApiController@postProductUser');
+
+    Route::post('/upprod', 'api\ApiController@upProductUser');
     Route::post('/postsale', 'api\ApiController@postSales');
 
 });

@@ -30,7 +30,9 @@
                     <div class="box-body table-responsive">
                             <table class="table table-bordered table-striped data-table" id="dataTable">
                             <thead>
+                                {{-- <th>UID</th> --}}
                                 <th>User</th>
+                                {{-- <th>PID</th> --}}
                                 <th>Product</th>
                                 <th>Stocks</th>
                                 <th>Status</th>
@@ -43,7 +45,9 @@
                                      @foreach ($toko->products as $item)
                                         @if ($item->pivot->stock < $limit)
                                         <tr>
+                                                {{-- <td>{{$toko->id}}</td> --}}
                                                 <td>{{$toko->name}}</td>
+                                                {{-- <td>{{$item->id}}</td> --}}
                                                 <td>{{$item->name}}</td>
                                                 @if ($item->pivot->stock == 0)
                                                     <td>{{$item->pivot->stock}}</td>
@@ -59,7 +63,8 @@
                                                     @endif
                                                 </td>
                                                 <td>{{Carbon\Carbon::parse($item->created_at)->format('d F Y H:i')}}</td>
-                                             </tr>
+                                                <td><a class="fa fa-pencil" href="#" style="color : black"></a></td>
+                                            </tr>
                                         
                                         @endif
                                      @endforeach  

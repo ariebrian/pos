@@ -80,9 +80,10 @@ class StoreController extends Controller
      * @param  \App\Store  $store
      * @return \Illuminate\Http\Response
      */
-    public function edit(Store $store)
+    public function edit($id)
     {
         //
+        return view('updatestore', ['id'=>$id]);
     }
 
     /**
@@ -92,9 +93,22 @@ class StoreController extends Controller
      * @param  \App\Store  $store
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Store $store)
+    public function update(Request $request)
     {
         //
+        $id = $request->id;
+        $store = Store::find($id);
+        $store->id = $id;
+        $store->name = $request->name;
+        $store->address = $request->address;
+        $store->phone = $request->phone;
+        $store->email = $request->email;
+        $store->password = $store->password;
+        $store->token = $store->token;
+
+        $store->save();
+        // dd($admin);
+        return redirect('stores');
     }
 
     /**

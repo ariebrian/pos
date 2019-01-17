@@ -149,7 +149,8 @@ class ApiController extends Controller
         for ($i=0; $i < sizeof($prod); $i++) {
             // dd(gettype($prod[$i]->pivot->stock)); 
             if ($prod[$i]->pivot->stock < $batas) {
-                array_push($data,$prod[$i]);   
+                $amount = $batas - $prod[$i]->pivot->stock;
+                array_push($data,['prods'=>$prod[$i],'amount'=>$amount]);   
             }
         }
         return response()->json($data, 200);
